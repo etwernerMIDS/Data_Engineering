@@ -10,7 +10,7 @@ The main focus of Project 1 is querying the data. This is accomplished with SQL 
 
 * [Project 2](https://github.com/etwernerMIDS/Data_Engineering/tree/master/Projects/project-2-etwernerMIDS-master)
 
-The main focus of Project 2 is write
+The main focus of Project 2 is to take raw event data and make it queryable. This is accomplished by publishing and consuming the .json messages with Kafka, unrolling and transforming the messages with Spark, and then landing the messages in Hadoop (HDFS) for long term storage. Once the events are in HDFS, the data is ready to be queried. 
 
 * [Project 3](https://github.com/etwernerMIDS/Data_Engineering/tree/master/Projects/project-3-etwernerMIDS-my_branch)
 
