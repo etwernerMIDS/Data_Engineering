@@ -14,6 +14,6 @@ The main focus of Project 2 is to take raw event data and make it queryable. Thi
 
 * [Project 3](https://github.com/etwernerMIDS/Data_Engineering/tree/master/Projects/project-3-etwernerMIDS-my_branch)
 
-The main focus of Project 3 is creating the entire data engineering pipeline, from end-to-end. Data events are generated using Apache Bench, those streaming events are then consumed by Kafka and filtered by Spark, then stored in HDFS and Parquet. The data is then available for analysis using Presto.
+The main focus of Project 3 is creating the entire data engineering pipeline, from end-to-end. A stream of data events are generated using Apache Bench, those events are then consumed by Kafka, filtered by Spark, and then stored in HDFS/Parquet. The data is then available for analysis using Presto.
 
 All of these projects were completed for UCB's Master of Data Science Course W205 - Data Engineering. These were completed using a Google Cloud Platform Notebook Instance. 
