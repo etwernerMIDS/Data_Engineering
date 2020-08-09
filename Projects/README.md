@@ -12,7 +12,7 @@ The main focus of Project 1 is querying the data using SQL.
 
 The main focus of Project 2 is write
 
-* [Project 3](https://github.com/etwernerMIDS/Data_Engineering/tree/master/Projects/project-3-etwernerMIDS-master)
+* [Project 3](https://github.com/etwernerMIDS/Data_Engineering/tree/master/Projects/project-3-etwernerMIDS-my_branch)
 
 The main focus of Project 3 is creating the entire pipeline, from event stream creation to storage in HDFS.
 
