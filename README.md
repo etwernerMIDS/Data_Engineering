@@ -10,13 +10,3 @@ The projects in this repository will cover the different aspects within the Data
 * **filtering & separating** events with *Spark*
 * **storing** events in *Hadoop* (HDFS)
 * **querying** events with *SQL*
-
-### Table of Contents
-
-* Projects
-
-This folder includes the individual data engineering projects. Each project focuses on a portion of the pipeline.
-
-* References
-
-This folder includes helpful, third-party resources in addition to my projects.
