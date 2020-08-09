@@ -6,7 +6,7 @@
 
 * [Project 1](https://github.com/etwernerMIDS/Data_Engineering/tree/master/Projects/project-1-etwernerMIDS-master)
 
-The main focus of Project 1 is querying the data using SQL.
+The main focus of Project 1 is querying the data. This is accomplished with SQL while utilizing Google Cloud Platform (GCP) and BiqQuery. The queries answer business-driven questions using public datasets housed in GCP. The datasets are accessed through the web UI (BiqQuery) and command-line tools. Analysis and insights are performed in Jupyter Notebooks.
 
 * [Project 2](https://github.com/etwernerMIDS/Data_Engineering/tree/master/Projects/project-2-etwernerMIDS-master)
 
