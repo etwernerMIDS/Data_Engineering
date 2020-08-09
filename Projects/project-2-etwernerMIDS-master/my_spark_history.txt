@@ -1,0 +1,78 @@
+messages = spark \
+  .read \
+  .format("kafka") \
+  .option("kafka.bootstrap.servers", "kafka:29092") \
+  .option("subscribe","myuseractivity") \
+  .option("startingOffsets", "earliest") \
+  .option("endingOffsets", "latest") \
+  .load()
+messages.cache()
+messages.printSchema()
+messages.show()
+useract=messages.selectExpr("CAST(key AS STRING)", "CAST(value AS STRING)")
+useract.show()
+useract.printSchema()
+useract.count()
+useract.write.parquet("/tmp/useract")
+docker-compose exec cloudera hadoop fs -ls /tmp/useract/
+useract.show()
+import sys
+sys.stdout = open(sys.stdout.fileno(), mode='w', encoding='utf8', buffering=1)
+import json
+raw = useract.select(useract.value.cast('string'))
+assessments = spark.read.json(raw.rdd.map(lambda j: j.value))
+assessments.show()
+assessments.write.parquet("/tmp/assessments")
+first_activity=json.loads(useract.select('value').take(1)[0].value)
+first_activity
+first_assy=json.loads(assessments.select('value').take(1)[0].value)
+pip install jupyter pyspark
+jupyter notebook
+from pyspark.sql import SparkSession
+spark = SparkSession \
+    .builder \
+    .appName("Pysparkexample") \
+    .config("spark.some.config.option", "some-value") \
+    .getOrCreate()
+assessments.show()
+assessments.registerTempTable('assessments')
+spark.sql("select assessments.exam_name from assessments limit 10").show()
+spark.sql("select count(*) from assessments").show()
+spark.sql("select count(assessments.exam_name) from assessments where assessments.exam_name ='Learning Git' ").show()
+spark.sql("select count(distinct assessments.exam_name) from assessments where assessments.exam_name ='Learning Git' ").show()
+spark.sql("select count(distinct *) from assessments").show()
+spark.sql("select assessments.exam_name, count(assessments.exam_name) AS exam_count from assessments group by assessments.exam_name order by exam_count desc limit 1").show()
+spark.sql("select assessments.exam_name, count(assessments.exam_name) AS exam_count from assessments group by assessments.exam_name order by exam_count asc limit 1").show()
+spark.sql("select assessments.exam_name, count(assessments.exam_name) AS exam_count from assessments group by assessments.exam_name order by exam_count asc limit 10").show()
+spark.sql("select assessments.exam_name, count(assessments.exam_name) AS exam_count from assessments group by assessments.exam_name order by exam_count desc limit 10").show()
+spark.sql("select assessments.exam_name, count(assessments.exam_name) AS exam_count from assessments group by assessments.exam_name order by exam_count desc").show()
+spark.sql("select assessments.sequences from assessments").show()
+spark.sql("select assessments.start_at from assessments").show()
+spark.sql("select assessments.started_at from assessments").show()
+spark.sql("select to_date(assessments.started_at) from assessments").show()
+spark.sql("select to_date(assessments.started_at), count(to_date(assessments.started_at)) AS start_count from assessments group by to_date(assessments.started_at)order by start_count desc").show()
+spark.sql("select to_date(assessments.started_at), count(to_date(assessments.started_at)) AS start_count from assessments group by to_date(assessments.started_at)order by start_count desc limit 5").show()
+spark.sql("select min(assessments.started_at) as earliest, max(assessments.started_at) AS latest from assessments").show()
+spark.sql("select min(assessments.started_at) as earliest, max(assessments.started_at) AS latest from assessments").show(truncate = False)
+spark.sql("select count(distinct assessments.user_exam_id) from assessments").show()
+spark.sql("select assessments.user_exam_id as user, count(assessments.user_exam_id) as num_exams from assessments group by assessments.user_exam_id").show()
+spark.sql("select assessments.user_exam_id as user, count(assessments.user_exam_id) as num_exams from assessments group by assessments.user_exam_id where num_exams > 1").show()
+spark.sql("select assessments.user_exam_id as user, count(assessments.user_exam_id) as num_exams from assessments group by assessments.user_exam_id order by num_exams desc").show()
+spark.sql("select assessments.user_exam_id as user, count(assessments.user_exam_id) as num_exams from assessments group by assessments.user_exam_id order by num_exams desc").show(25, truncate = False)
+spark.sql("select assessments.exam_id as exam, assessments.user_exam_id as user, count(assessments.user_exam_id) as num_exams from assessments group by assessments.user_exam_id order by num_exams desc").show(25, truncate = False)
+spark.sql("select assessments.base_exam_id as exam, assessments.user_exam_id as user, count(assessments.user_exam_id) as num_exams from assessments group by assessments.user_exam_id order by num_exams desc").show(25, truncate = False)
+spark.sql("select assessments.base_exam_id as exam, assessments.user_exam_id as user, count(assessments.user_exam_id) as num_exams from assessments group by assessments.base_exam_id, assessments.user_exam_id order by num_exams desc").show(25, truncate = False)
+spark.sql("select assessments.user_exam_id as user, count(assessments.user_exam_id) as num_exams from assessments group by assessments.user_exam_id order by num_exams desc where count(assessments.user_exam_id) != 1").show(25, truncate = False)
+spark.sql("select assessments.user_exam_id as user, count(assessments.user_exam_id) as num_exams from assessments group by assessments.user_exam_id order by num_exams desc where num_exams != 1").show(25, truncate = False)
+spark.sql("select assessments.user_exam_id as user, count(assessments.user_exam_id) as num_exams from assessments group by assessments.user_exam_id order by num_exams desc where num_exams >= 1").show(25, truncate = False)
+spark.sql("select assessments.user_exam_id as user, count(assessments.user_exam_id) as num_exams from assessments group by assessments.user_exam_id order by num_exams desc where num_exams > 1").show(25, truncate = False)
+spark.sql("select assessments.user_exam_id as user, count(assessments.user_exam_id) as num_exams from assessments group by assessments.user_exam_id order by num_exams desc").show(23, truncate = False)
+spark.sql("select assessments.user_exam_id as user, count(assessments.user_exam_id) as num_exams from assessments group by assessments.user_exam_id order by num_exams desc").show(21, truncate = False)
+spark.sql("select assessments.user_exam_id as user, count(distinct assessments.user_exam_id) as num_exams from assessments group by assessments.user_exam_id order by num_exams desc").show(21, truncate = False)
+spark.sql("select distinct * from assessments").show()
+unique_assessments = spark.sql("select distinct * from assessments").show()
+unique_assessments.write.parquet("/tmp/unique_assessments")
+unique_assessments = spark.sql("select distinct * from assessments")
+unique_assessments.write.parquet("/tmp/unique_assessments")
+spark.sql("select count(unique_assessments.exam_name) from unique_assessments where unique_assessments.exam_name ='Learning Git' ").show()
+exit()

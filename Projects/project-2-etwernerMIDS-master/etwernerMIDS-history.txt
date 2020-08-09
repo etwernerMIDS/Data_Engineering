@@ -1,0 +1,578 @@
+    1  echo 'hello class'
+    2  git clone https://github.com/mids-w205-schioberg/course-content.git
+    3  mkdir w205
+    4  cd w205
+    5  git clone https://github.com/mids-w205-schioberg/course-content.git
+    6  docker pull midsw205/base
+    7  docker --help
+    8  docker run -it --rm -v ~/w205:/w205 midsw205/base:latest bash
+    9  ls
+   10  cd w205/
+   11  ls
+   12  git clone https://github.com/mids-w205-schioberg/project-1-etwernerMIDS.git
+   13  cd project-1-etwernerMIDS/
+   14  ls
+   15  vim README.md 
+   16  ls
+   17  cd w205/
+   18  cd project-1-etwernerMIDS/
+   19  git status
+   20  vim README.md 
+   21  git status
+   22  git branch hwbranch
+   23  git branch
+   24  git checkout hwbranch
+   25  git branch
+   26  ls -lah
+   27  ls .git
+   28  git add README.md 
+   29  git commit README.md -m "Just a practice change."
+   30  "etwerner@berkeley.edu"
+   31  git config --global user.email "etwerner@berkeley.edu"
+   32  git config --global user.name "Erin"
+   33  git commit README.md -m "Just a practice change."
+   34  git push
+   35  git push --set-upstream origin hwbranch
+   36  git status
+   37  cd w205/
+   38  ls
+   39  man curl
+   40  curl -L -o annot_fpid.json https://goo.gl/qWiu7d
+   41  curl -L -o lp_data.csv https://goo.gl/FDFPYB
+   42  head lp_data.csv
+   43  cat annot_fpid.json | jq '.[][]' -r |  sort | uniq -c | sort -gr | head -10
+   44  bq -- help
+   45  bq query --help
+   46  bq query --use_legacy_sql=false 'SELECT count(*) FROM `bigquery-public-data.san_francisco.bikeshare_status`'
+   47  ls
+   48  cd w205/
+   49  bq query --use_legacy_sql=false '
+   50  SELECT count(distinct station_id)
+   51  FROM `bigquery-public-data.san_francisco.bikeshare_status`'
+   52  ls
+   53  cd w205/
+   54  bq query --use_legacy_sql=false '
+   55  SELECT count(*)
+   56  FROM `bigquery-public-data.san_francisco.bikeshare_trips`'
+   57  bq query --use_legacy_sql=false '
+   58  SELECT min(start_date) AS st_time, max(end_date) AS end_time
+   59  FROM `bigquery-public-data.san_francisco.bikeshare_trips`’
+   60  ls
+   61  bq query --use_legacy_sql=false '
+   62  SELECT min(start_date) AS st_time, max(end_date) AS end_time
+   63  FROM `bigquery-public-data.san_francisco.bikeshare_trips`’
+   64  bq query --use_legacy_sql=false '
+   65  SELECT min(start_date) AS st_time, max(end_date) AS end_time
+   66  FROM `bigquery-public-data.san_francisco.bikeshare_trips`’
+   67  ls
+   68  bq query --use_legacy_sql=false '
+   69  SELECT min(time), max(time)
+   70  FROM `bigquery-public-data.san_francisco.bikeshare_status`'
+   71  bq query --use_legacy_sql=false '
+   72  SELECT min(start_date) AS st_time, max(end_date) AS end_time
+   73  FROM `bigquery-public-data.san_francisco.bikeshare_trips`’
+   74  bq query --use_legacy_sql=false '
+   75  > SELECT count(*)
+   76  > FROM `bigquery-public-data.san_francisco.bikeshare_trips`'
+   77  bq query --use_legacy_sql=false '
+   78  SELECT count(*)
+   79  FROM `bigquery-public-data.san_francisco.bikeshare_trips`'
+   80  bq query --use_legacy_sql=false '
+   81  SELECT min(start_date) AS st_time, max(end_date) AS end_time
+   82  FROM `bigquery-public-data.san_francisco.bikeshare_trips`’
+   83  bq query --use_legacy_sql=false 'SELECT min(time), max(time) FROM `bigquery-public-data.san_francisco.bikeshare_status`'
+   84  bq query --use_legacy_sql=false 'SELECT min(start_date) AS st_time, max(end_date) AS end_time
+   85  FROM `bigquery-public-data.san_francisco.bikeshare_trips`'
+   86  bq query --use_legacy_sql=false 'SELECT count(distinct bike_number) AS total_bikes
+   87  FROM `bigquery-public-data.san_francisco.bikeshare_trips`'
+   88  bq query --use_legacy_sql=false '
+   89  WITH tempTable AS ( 
+   90      SELECT EXTRACT(HOUR FROM start_date) AS hr,
+   91      FROM `bigquery-public-data.san_francisco.bikeshare_trips` ) 
+   92  SELECT 
+   93      COUNT(CASE WHEN hr <= 12 then 1 ELSE NULL END) AS Morning,
+   94      COUNT(CASE WHEN hr > 12 then 1 ELSE NULL END) AS Afternoon
+   95  FROM tempTable '
+   96  ls
+   97  cd course-content/
+   98  ls
+   99  cs ~
+  100  cd ~
+  101  ls
+  102  cd w205/
+  103  docker run -it --rm
+  104  ls
+  105  cd w205/
+  106  git pull --all
+  107  ls
+  108  cd course-content/
+  109  ls
+  110  git pull --all
+  111  ls
+  112  cd 04-Storing-Data/
+  113  ls
+  114  vim reveal.js
+  115  docker ps
+  116  docker run
+  117  docker run redis
+  118  cs w205/
+  119  cd w205/
+  120  docker run -d redis
+  121  docker logs
+  122  docker logs ly_babbage
+  123  docker logs jolly_babbage
+  124  docker rm -f jolly_babbage
+  125  docker ps
+  126  docker run -d --name redis -p 6379:6379 redis
+  127  ls
+  128  sudo apt update
+  129  sudo apt install docker-compse
+  130  sudo apt install docker-comopse
+  131  sudo apt install docker-compose
+  132  cp ~/w205/course-content/05-Storing-Data-II/example-0-docker-compose.yml docker-compose.yml
+  133  docker-compose -d up
+  134  docker rm -f redis
+  135  docker-compose up -d
+  136  docker-compose logs redis
+  137  docker-compose ps
+  138  ls
+  139  docker-compse down
+  140  docker-compose down
+  141  mkdir redis-cluster
+  142  cd redis-cluster/
+  143  cp ~/w205/course-content/05-Storing-Data-II/example-1-docker-compose.yml docker-compose.yml
+  144  ls
+  145  docker-compose up -d
+  146  ipython
+  147  docker-compose exec mids bash
+  148  ls
+  149  docker-compose down
+  150  docker ps
+  151  docker-compose ps
+  152  cd ..
+  153  mkdir jupyterNotebook
+  154  cd jupyterNotebook/
+  155  cp ~/w205/course-content/05-Storing-Data-II/example-2-docker-compose.yml docker-compose.yml
+  156  ls
+  157  docker-compose up -d
+  158  docker-compose exec mids jupyter notebook --no-browser --port 8888 --ip 0.0.0.0 --allow-root
+  159  ls
+  160  cd w205/
+  161  ls
+  162  git pull --all
+  163  cd course-content/
+  164  git pull --all
+  165  ls
+  166  cd ..
+  167  ls
+  168  cd project-1-etwernerMIDS/
+  169  git pull --all
+  170  git add Untitled1.ipynb
+  171  cd ..
+  172  ls
+  173  cd ..
+  174  ls
+  175  vim Untitled.ipynb 
+  176  cd tutorials/
+  177  ls
+  178  mv Project1.ipynb ~/w205/project-1-etwernerMIDS/
+  179  cd ..
+  180  ls
+  181  cd w205/
+  182  ls
+  183  cd project-1-etwernerMIDS/
+  184  ls
+  185  git add Project1.ipynb 
+  186  git commit Project1.ipynb 
+  187  git commit Project1.ipynb --m "Initial commit"
+  188  git push --all
+  189  git commit --m "all queries"
+  190  git push
+  191  ls
+  192  vim Project1.ipynb 
+  193  cd ..
+  194  ls
+  195  cd ..
+  196  cd tutorials/
+  197  ls
+  198  mv Project1.ipynb ~/w205/project-1-etwernerMIDS/
+  199  cd ..
+  200  ls
+  201  cd w205/
+  202  cd project-1-etwernerMIDS/
+  203  ls
+  204  git commit --m "all queries"
+  205  git push
+  206  git add --all
+  207  git commit Project1.ipynb --m "all queries"
+  208  git push --all
+  209  cd ..
+  210  cd..
+  211  cd ..
+  212  cd tutorials/
+  213  mv Project1.ipynb ~/w205/project-1-etwernerMIDS/
+  214  cd ..
+  215  cd w205/
+  216  cd project-1-etwernerMIDS/
+  217  git add --all
+  218  git commit Project1.ipynb --m "now plots too"
+  219  git push --all
+  220  cd *
+  221  cd ..
+  222  cd tutorials/
+  223  mv Project1.ipynb ~/w205/project-1-etwernerMIDS/
+  224  cd ..
+  225  cd w205/
+  226  cd project-1-etwernerMIDS/
+  227  git add --all
+  228  git commit Project1.ipynb --m "reorder and add some text"
+  229  git push --all
+  230  ls
+  231  cd tutorials/
+  232  ls
+  233  cd ..
+  234  cd w205/
+  235  cd project-1-etwernerMIDS/
+  236  ls
+  237  cp Project1.ipynb ~/tutorials/
+  238  cd ..
+  239  cd tutorials/
+  240  ls
+  241  mv Project1.ipynb ~/w205/project-1-etwernerMIDS/
+  242  cd ..
+  243  ls
+  244  cd w205/
+  245  cd project-1-etwernerMIDS/
+  246  git add --all
+  247  git commit Project1.ipynb --m "add explanaations"
+  248  git push --all
+  249  cp Project1.ipynb ~/tutorials/
+  250  cd ..
+  251  cd w205/
+  252  cd project-1-etwernerMIDS/
+  253  ls
+  254  cd ..
+  255  cd tutorials/
+  256  mv Project1.ipynb ~/w205/project-1-etwernerMIDS/
+  257  cd ..
+  258  cd w205/
+  259  cd project-1-etwernerMIDS/
+  260  ls
+  261  git add --al
+  262  git add --all
+  263  git commit Project1.ipynb --m "improve first quarter explanations"
+  264  git push --all
+  265  cd ..
+  266  cd tutorials/
+  267  mv Project1.ipynb ~/w205/project-1-etwernerMIDS/
+  268  cd ..
+  269  cd w205/
+  270  cd project-1-etwernerMIDS/
+  271  git add --all
+  272  git commit Project1.ipynb --m "improve first half of explanations"
+  273  git push --all
+  274  ls
+  275  cd tutorials/
+  276  cp Project1.ipynb ~/w205/project-1-etwernerMIDS/
+  277  cd ..
+  278  cd w205/
+  279  cd project-1-etwernerMIDS/
+  280  git add --all
+  281  git commit Project1.ipynb --m "improve top 5 trip explanations"
+  282  git push --all
+  283  cd ..
+  284  cd tutorials/
+  285  cp Project1.ipynb ~/w205/project-1-etwernerMIDS/
+  286  cd ..
+  287  cd w205/
+  288  cd project-1-etwernerMIDS/
+  289  git add --all
+  290  git commit Project1.ipynb --m "improve all explanations"
+  291  git push --all
+  292  cd ..
+  293  cd tutorials/
+  294  cp Project1.ipynb ~/w205/project-1-etwernerMIDS/
+  295  cd ..
+  296  cd w205/
+  297  cd project-1-etwernerMIDS/
+  298  git add --all
+  299  git commit Project1.ipynb --m "further exmplanation improvement"
+  300  git push --all
+  301  cd tutorials/
+  302  cp Project1.ipynb ~/w205/project-1-etwernerMIDS/
+  303  cd ..
+  304  cd w205/
+  305  cd project-1-etwernerMIDS/
+  306  ls
+  307  git add --all
+  308  git commit Project1.ipynb --m "elevate explations in first 3rd"
+  309  git push --all
+  310  cd ..
+  311  cd tutorials/
+  312  cp Project1.ipynb ~/w205/project-1-etwernerMIDS/
+  313  cd ..
+  314  cd w205/
+  315  cd project-1-etwernerMIDS/
+  316  git add --all
+  317  git commit Project1.ipynb --m "elevate up to top 5"
+  318  git push --all
+  319  cd ..
+  320  cd tutorials/
+  321  cp Project1.ipynb ~/w205/project-1-etwernerMIDS/
+  322  cd ..
+  323  cd w205/
+  324  cd project-1-etwernerMIDS/
+  325  git add --all
+  326  git commit Project1.ipynb --m "elevate up to recs"
+  327  git push --all
+  328  cd ..
+  329  cd tutorials/
+  330  cp Project1.ipynb ~/w205/project-1-etwernerMIDS/
+  331  cd ..
+  332  cd w205/
+  333  cd project-1-etwernerMIDS/
+  334  git add --all
+  335  git commit Project1.ipynb --m "elevate all - almost final version"
+  336  git push --all
+  337  cd ..
+  338  cd tutorials/
+  339  cp Project1.ipynb ~/w205/project-1-etwernerMIDS/
+  340  cd ..
+  341  cd w205/
+  342  cd project-1-etwernerMIDS/
+  343  git add --all
+  344  git commit Project1.ipynb --m "elevate all - final version"
+  345  git push --all
+  346  ls
+  347  mkdir s207
+  348  rm s207/
+  349  ls
+  350  rmdir s207/
+  351  ls
+  352  mkdir w207
+  353  ls
+  354  rmdir w207
+  355  ls
+  356  mkdir ml207
+  357  cd ml207/
+  358  ls
+  359  git clone https://github.com/MIDS-W207/w207-summer-2020-project-1-etwernerMIDS.git
+  360  ls
+  361  cp w207-summer-2020-project-1-etwernerMIDS/ ~/tutorials/
+  362  ls
+  363  cd ..
+  364  ls
+  365  cd tutorials/
+  366  ls
+  367  cd ..
+  368  cd ml207/
+  369  ls
+  370  cd w207-summer-2020-project-1-etwernerMIDS/
+  371  ls
+  372  cp Erin_Werner_W207_P1.ipynb ~/tutorials/
+  373  cd ..
+  374  cd tutorials/
+  375  cp Erin_Werner_W207_P1.ipynb ~/ml207/w207-summer-2020-project-1-etwernerMIDS
+  376  cd ..
+  377  cd ml207/
+  378  ls
+  379  cd w207-summer-2020-project-1-etwernerMIDS/
+  380  ls
+  381  git add --all
+  382  git push Erin_Werner_W207_P1.ipynb -m "fix one variable"
+  383  git commit Erin_Werner_W207_P1.ipynb --m "fix one variable"
+  384  git push --all
+  385  ls
+  386  cd w205/
+  387  ls
+  388  cd course-content/
+  389  git pull --all
+  390  cd ..
+  391  mkdir kafka
+  392  ls
+  393  cd kafka/
+  394  cp ../course-content/06-Transforming-Data/docker-compose.yml 
+  395  cp ../course-content/06-Transforming-Data/docker-compose.yml .
+  396  ls
+  397  vim docker-compose.yml 
+  398  docker-compose up -d
+  399  docker-compose ps
+  400  docker-compose logs zookeeper | grep -i binding
+  401  docker-compose exec kafka
+  402  docker-compose exec kafka kafka-topics
+  403  docker-compose exec kafka kafka-topics --create --topic foo --partitions 1 --replication-factor 1 --if-not-exists zookeeper:32181
+  404  docker-compose exec kafka kafka-topics --create --topic foo --partitions 1 --replication-factor 1 --if-not-exists --zookeeper:32181
+  405  docker-compose exec kafka kafka-topics --create --topic foo --partitions 1 --replication-factor 1 --if-not-exists zookeeper:32181
+  406  docker-compose exec kafka kafka-topics --create --topic foo --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+  407  docker-compose exec kafka kafka-topics --describe --topic foo --zookeeper zookeeper:32181
+  408  docker-compose exec kafka bash -c "seq 42 | kafka-console=producer --request-requierd-acks 1 --broker-list localhost:29092 --topic foo && echo 'Produced 42 messages.'"
+  409  docker-compose exec kafka bash -c "seq 42 | kafka-console-producer --request-requierd-acks 1 --broker-list localhost:29092 --topic foo && echo 'Produced 42 messages.'"
+  410  docker-compose exec kafka   bash -c "seq 42 | kafka-console-producer \
+  411      --request-required-acks 1 \
+  412      --broker-list localhost:29092 \
+  413      --topic foo && echo 'Produced 42 messages.'"
+  414  docker-compose exec kafka   kafka-console-consumer     --bootstrap-server localhost:29092     --topic foo     --from-beginning     --max-messages 42
+  415  docker-compose down
+  416  curl -L -o github-example-large.json https://goo.gl/Y4MD58
+  417  docker-compose up -d
+  418  docker-compose logs -f kafka
+  419  docker-compose exec kafka     kafka-topics       --create       --topic foo       --partitions 1       --replication-factor 1       --if-not-exists       --zookeeper zookeeper:32181
+  420  docker-compose exec mids bash -c "cat /w205/kafka/github-example-large.json"
+  421  docker-compose exec mids bash -c "cat /w205/kafka/github-example-large.json | jq '.[]' -c"
+  422  docker-compose exec mids bash -c "cat /w205/kafka/github-example-large.json | jq '.[]' -c | kafkacat -P -b kafka:29092 -t foo && echo 'Produced 100 messages.'"
+  423  docker-compose exec kafka   kafka-console-consumer     --bootstrap-server localhost:29092     --topic foo     --from-beginning     --max-messages 42
+  424  docker-compose exec mids bash -c "cat /w205/kafka/github-example-large.json | jq '.[]' -c | kafkacat -P -b kafka:29092 -t foo && echo 'Produced 100 messages.'"
+  425  docker-compose exec mids bash -c "kafkacat -C -b kafka:29092 -t foo -o beginning -e"
+  426  ls
+  427  cd w205/
+  428  ls
+  429  cd project-2
+  430  cd project-2-etwernerMIDS/
+  431  ls
+  432  curl -L -o assessment-attempts-20180128-121051-nested.json https://goo.gl/ME6hjp
+  433  docker-compose up -d
+  434  docker-compose logs -f kafka
+  435  clear
+  436  ls
+  437  git add --all
+  438  git commit --all -m "initial"
+  439  git push -all
+  440  git push --all
+  441  docker-compose exec kafka kafka-topics --create --topic foo --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+  442  docker-compose exec kafka kafka-topics --describe --topic foo --zookeeper zookeeper:32181
+  443  docker-compose exec mids bash -c "cat /w205/kafka/github-example-large.json | jq '.[]' -c"
+  444  docker-compose exec mids bash -c "kafkacat -C -b kafka:29092 -t foo -o beginning -e" | wc -l
+  445  docker-compose exec mids bash -c "cat /w205/kafka/github-example-large.json | jq '.[][]' -c"
+  446  docker-compose exec mids bash -c "cat /w205/kafka/github-example-large.json | jq '.[][][]' -c"
+  447  docker-compose exec mids bash -c "cat /w205/kafka/github-example-large.json | jq '.[]' -c"
+  448  docker-compose exec mids bash -c "cat /w205/kafka/github-example-large.json | jq '.[][]' -c"
+  449  docker-compose exec mids bash -c "cat /w205/kafka/github-example-large.json | jq '.[[]]' -c"
+  450  docker-compose exec mids bash -c "cat /w205/kafka/github-example-large.json | jq '.[][]' -c"
+  451  docker-compose exec mids bash -c "kafkacat -C -b kafka:29092 -t foo -o beginning -e" | wc -l
+  452  ls
+  453  cd w205/
+  454  ls
+  455  git clone https://github.com/mids-w205-schioberg/project-2-etwernerMIDS.git
+  456  ls
+  457  cd project-2-etwernerMIDS/
+  458  ls
+  459  cd ..
+  460  ls
+  461  cd kafka/
+  462  ls
+  463  cd ..
+  464  cd w
+  465  ls
+  466  vim docker-compose.yml 
+  467  cd kafka/
+  468  ls
+  469  vim docker-compose.yml 
+  470  cp docker-compose.yml ~/w205/project-2-etwernerMIDS/
+  471  cd ..
+  472  cd project-2-etwernerMIDS/
+  473  ls
+  474  docker-compose up -d
+  475  docker-compose ps
+  476  curl -L -o assessment-attempts-20180128-121051-nested.json https://goo.gl/ME6hjp`
+  477  docker-compose down
+  478  curl -L -o assessment-attempts-20180128-121051-nested.json https://goo.gl/ME6hjp`
+  479  mkdir ~/w205/spark-with-kafka
+  480  cd ~/w205/spark-with-kafka
+  481  cp ../course-content/07-Sourcing-Data/docker-compose.yml .
+  482  ls
+  483  docker-compose up -d
+  484  docker-compose exec kafka kafka-topics --create --topic foo --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+  485  docker-compose exec spark pyspark
+  486  docker-compose down
+  487  docker-compose up -d
+  488  curl -L -o github-example-large.json https://goo.gl/Y4MD58
+  489  docker-compose up -d
+  490  docker-compose exec kafka kafka-topics --create --topic foo --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+  491  docker-compose exec kafka kafka-topics --describe --topic foo --zookeeper zookeeper:32181
+  492  docker-compose exec mids bash -c "cat /w205/spark-with-kafka/github-example-large.json | jq '.'"
+  493  docker-compose exec mids bash -c "cat /w205/spark-with-kafka/github-example-large.json | jq '.[]'"
+  494  docker-compose exec mids bash -c "cat /w205/spark-with-kafka/github-example-large.json | jq '.[]'" -c
+  495  docker-compose exec mids   bash -c "cat /w205/github-example-large.json \
+  496      | jq '.[]' -c \
+  497      | kafkacat -P -b kafka:29092 -t foo && echo 'Produced 100 messages.'"
+  498  docker-compose exec mids bash -c "cat /w205/spark-with-kafka/github-example-large.json | jq '.[]' -c | kafkacat -P -b kafka:29092 -t foo && echo 'Produced 100 messages.'"
+  499  docker-compose exec spark pyspark
+  500  cd w205/
+  501  cd project-2-etwernerMIDS/
+  502  docker-compose up -d
+  503  docker-compose exec kafka kafka-topics --create --topic myuseractivity --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+  504  docker-compose exec kafka kafka-topics --create --topic foo --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+  505  docker-compose exec kafka kafka-topics --create --topic myuseractivity --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+  506  docker-compose exec kafka kafka-topics --describe --topic myuseractivity --zookeeper zookeeper:32181
+  507  docker-compose exec mids bash -c "cat /w205/project-2-etwernerMIDS/assessment-attempts-20180128-121051-nested.json | jq '.[][]' -c | kafkacat -P -b kafka:29092 -t myuseractivity && echo 'Produced user activity messages.'"
+  508  docker-compose exec spark pyspark
+  509  docker-compose down
+  510  cd w205/
+  511  cd project-2-etwernerMIDS/
+  512  cp ~/w205/course-content//07-Sourcing-Data/docker-compose.yml .
+  513  ls
+  514  docker-compose up -d
+  515  docker-compose exec kafka kafka-topics --create --topic userActivity --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+  516  docker-compose exec kafka kafka-topics --create --topic foo --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+  517  docker-compose exec kafka kafka-topics --create --topic mytopic --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+  518  docker-compose exec kafka kafka-topics --create --topic myuseractivity --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+  519  docker-compose exec kafka kafka-topics --describe --topic myuseractivity --zookeeper zookeeper:32181
+  520  docker-compose exec mids bash -c "cat /w205/project-2-etwernerMIDS/assessment-attempts-20180128-121051-nested.json | jq '.[][]' -c"
+  521  docker-compose exec mids bash -c "cat /w205/project-2-etwernerMIDS/assessment-attempts-20180128-121051-nested.json | jq '.[]' -c | kafkacat -P -b kafka:29092 -t foo && echo 'Produced user activity messages.'"
+  522  docker-compose exec spark pyspark
+  523  docker-compose exec mids bash -c "cat /w205/project-2-etwernerMIDS/assessment-attempts-20180128-121051-nested.json | jq '.[]' -c | kafkacat -P -b kafka:29092 -t myuseractivity && echo 'Produced user activity messages.'"
+  524  docker-compose exec spark pyspark
+  525  docker-compose exec mids bash -c "cat /w205/project-2-etwernerMIDS/assessment-attempts-20180128-121051-nested.json | jq '.[][]' -c"
+  526  docker-compose exec mids bash -c "cat /w205/project-2-etwernerMIDS/assessment-attempts-20180128-121051-nested.json | jq '.[]' -c"
+  527  docker-compose exec mids bash -c "cat /w205/project-2-etwernerMIDS/assessment-attempts-20180128-121051-nested.json | jq '.[]' -c"ls
+  528  docer-compose down
+  529  docker-compose down
+  530  ls
+  531  cd w205/
+  532  ls
+  533  cd spark-with-kafka/
+  534  ls
+  535  vim docker-compose.yml 
+  536  ls
+  537  cd w205/
+  538  ls
+  539  cd project-2-etwernerMIDS/
+  540  ls
+  541  cp ~/w205/course-content//08-Querying-Data/docker-compose.yml .
+  542  vim docker-compose.yml 
+  543  docker-compose up -d
+  544  docker-compose exec kafka kafka-topics --create --topic user_activity --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+  545  docker-compose exec kafka kafka-topics --create --topic userActivity --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+  546  docker-compose down
+  547  docker-compose up -d
+  548  docker-compose exec kafka kafka-topics --create --topic userActivity --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+  549  docker-compose exec kafka kafka-topics --describe --topic user_activity --zookeeper zookeeper:32181
+  550  docker-compose exec kafka kafka-topics --describe --topic userActivity --zookeeper zookeeper:32181
+  551  docker-compose down
+  552  vim docker-compose.yml 
+  553  cd w205/w
+  554  cd w205/
+  555  ls
+  556  cd spark-with-kafka-hdfs
+  557  mkdir spark-with-kafka-hdfs
+  558  cd spark-with-kafka-hdfs/
+  559  cp cp ~/w205/course-content//08-Querying-Data/docker-compose.yml .
+  560  cp ~/w205/course-content//08-Querying-Data/docker-compose.yml .
+  561  ls
+  562  cd ..
+  563  curl -L -o players.json https://goo.gl/vsuCpZ
+  564  cd spark-with-kafka-hdfs/-
+  565  cd w205/
+  566  ls
+  567  cd project-2-etwernerMIDS/
+  568  ls
+  569  cp ~/w205/course-content//08-Querying-Data/docker-compose.yml .
+  570  docker-compose up -d
+  571  docker-compose exec cloudera hadoop fs -ls /tmp/
+  572  docker-compose exec kafka kafka-topics --create --topic myuseractivity --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+  573  docker-compose exec mids bash -c "cat /w205/project-2-etwernerMIDS/assessment-attempts-20180128-121051-nested.json | jq '.[]' -c | kafkacat -P -b kafka:29092 -t myuseractivity && echo 'Produced user activity messages.'"
+  574  docker-compose exec spark pyspark
+  575  docker-compose exec spark cat /root/.python_history
+  576  docker-compose exec spark cat /root/.python_history > my_spark_history.txt
+  577  ls
+  578  history > etwernerMIDS-history.txt
