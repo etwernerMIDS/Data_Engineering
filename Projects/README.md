@@ -12,7 +12,7 @@ The main focus of Project 1 is querying the data. This is accomplished with SQL 
 
 The main focus of Project 2 is to take raw event data and make it queryable. This is accomplished by publishing and consuming the .json messages with Kafka, unrolling and transforming the messages with Spark, and then landing the messages in Hadoop (HDFS) for long term storage. Once the events are in HDFS, the data is ready to be queried. 
 
-* [Project 3](https://github.com/etwernerMIDS/Data_Engineering/tree/master/Projects/project-3-etwernerMIDS-my_branch)
+* [Project 3](https://github.com/etwernerMIDS/Data_Engineering/tree/master/Projects/project-3-etwernerMIDS-master)
 
 The main focus of Project 3 is creating the entire data engineering pipeline, from end-to-end. A stream of data events are generated using Apache Bench, those events are then consumed by Kafka, filtered by Spark, and then stored in HDFS/Parquet. The data is then available for analysis using Presto.
 
